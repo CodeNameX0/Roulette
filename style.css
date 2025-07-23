@@ -1,0 +1,440 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Pretendard, sans-serif;
+}
+
+body {
+  background: #f5f5f5;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* 헤더 */
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 10px;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.creator {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.highlight {
+  color: #ff6b6b;
+  font-weight: bold;
+}
+
+/* 모달 */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 0;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  animation: slideIn 0.3s ease;
+  overflow: hidden;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.close {
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+  transition: 0.2s;
+}
+
+.close:hover {
+  opacity: 0.7;
+}
+
+.modal-body {
+  padding: 30px 25px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.result-text {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+  animation: bounceIn 0.6s ease;
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.3); opacity: 0; }
+  50% { transform: scale(1.05); }
+  70% { transform: scale(0.9); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.confetti {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.confetti::before,
+.confetti::after {
+  content: '🎉';
+  position: absolute;
+  font-size: 2rem;
+  animation: confettiDrop 2s ease-out;
+}
+
+.confetti::before {
+  left: 20%;
+  animation-delay: 0.2s;
+}
+
+.confetti::after {
+  right: 20%;
+  animation-delay: 0.5s;
+}
+
+@keyframes confettiDrop {
+  0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(200px) rotate(360deg); opacity: 0; }
+}
+
+.modal-footer {
+  padding: 20px 25px;
+  border-top: 1px solid #eee;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.modal-btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 120px;
+}
+
+.modal-btn.primary {
+  background: #4CAF50;
+  color: white;
+}
+
+.modal-btn.primary:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+}
+
+.modal-btn.danger {
+  background: #dc3545;
+  color: white;
+}
+
+.modal-btn.danger:hover {
+  background: #c82333;
+  transform: translateY(-2px);
+}
+
+.modal-btn {
+  background: #f8f9fa;
+  color: #333;
+  border: 1px solid #dee2e6;
+}
+
+.modal-btn:hover {
+  background: #e9ecef;
+  transform: translateY(-2px);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+/* 항목 관리 패널 */
+.panel {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  min-width: 300px;
+}
+
+.panel h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.input-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#itemInput {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+#itemInput:focus {
+  outline: none;
+  border-color: #4CAF50;
+}
+
+.items-list {
+  margin-bottom: 20px;
+}
+
+.items-list h3 {
+  margin-bottom: 10px;
+  color: #555;
+  font-size: 16px;
+}
+
+#itemsList {
+  list-style: none;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.item-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+  margin: 5px 0;
+  background: #f8f9fa;
+  border-radius: 5px;
+  border-left: 4px solid;
+}
+
+.item-text {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.item-controls {
+  display: flex;
+  gap: 5px;
+}
+
+.move-btn, .delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 12px;
+  margin: 0;
+}
+
+.move-btn {
+  background: #e9ecef;
+  color: #666;
+}
+
+.move-btn:hover {
+  background: #dee2e6;
+}
+
+.delete-btn {
+  background: #dc3545;
+  color: white;
+}
+
+.delete-btn:hover {
+  background: #c82333;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+}
+
+.controls button {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 12px;
+  margin: 0;
+}
+
+/* 룰렛 섹션 */
+.roulette-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.roulette-container {
+  position: relative;
+  width: 380px;
+  margin: auto;
+}
+
+canvas {
+  display: block;
+  margin: auto;
+  transform-origin: center center;
+  transition: 2s;
+}
+
+button {
+  background: #4CAF50;
+  color: white;
+  margin-top: 1rem;
+  padding: 0.8rem 1.8rem;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #45a049;
+}
+
+button:active {
+  background: #3d8b40;
+}
+
+#addButton {
+  background: #007bff;
+  padding: 10px 15px;
+  font-size: 14px;
+  margin: 0;
+}
+
+#addButton:hover {
+  background: #0056b3;
+}
+
+#clearAll {
+  background: #dc3545;
+}
+
+#clearAll:hover {
+  background: #c82333;
+}
+
+#resetDefault {
+  background: #6c757d;
+}
+
+#resetDefault:hover {
+  background: #545b62;
+}
+
+#pointer {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 25px solid #ff0000;
+  z-index: 10;
+}
+
+#result {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .panel {
+    min-width: auto;
+  }
+}

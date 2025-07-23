@@ -1,4 +1,6 @@
-# 🎰 Wheel of Fortune
+## 🎰 Wheel of Fortune
+
+[Play Here!](https://codenamex0.github.io/Roulette/)
 
 wheelofnames.com과 유사한 기능을 가진 인터랙티브 룰렛 게임입니다.
 
